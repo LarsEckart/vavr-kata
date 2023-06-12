@@ -69,14 +69,14 @@ public class CollectionsExercises extends PetDomainKata {
 
     @Test
     public void doAnyPeopleHaveCats() {
-        //replace null with a Predicate lambda which checks for PetType.CAT
+        // Replace null with a Predicate lambda which checks for PetType.CAT
         boolean doAnyPeopleHaveCats = false;
         assertTrue(doAnyPeopleHaveCats);
     }
 
     @Test
     public void doAllPeopleHavePets() {
-        //replace with a method call send to this.people that checks if all people have pets
+        // Replace with a method call send to this.people that checks if all people have pets
         Predicate<Person> predicate = null;
         boolean result = people.forAll(predicate);
         assertFalse(result);
@@ -84,7 +84,7 @@ public class CollectionsExercises extends PetDomainKata {
 
     @Test
     public void howManyPeopleHaveCats() {
-        // replace 0 with the correct answer
+        // Replace 0 with the correct answer
         int count = 0;
         assertEquals(2, count);
     }
@@ -98,14 +98,14 @@ public class CollectionsExercises extends PetDomainKata {
 
     @Test
     public void getPeopleWithPets() {
-        // replace with only the pets owners
+        // Replace with only the pets owners
         Seq<Person> petPeople = null;
         assertEquals(petPeople.size(), 7);
     }
 
     @Test
     public void getAllPetTypesOfAllPeople() {
-        // retrieve all pet types owned by the people
+        // Retrieve all pet types owned by the people
         Seq<PetType> petTypes = null;
 
         assertEquals(
@@ -115,28 +115,28 @@ public class CollectionsExercises extends PetDomainKata {
 
     @Test
     public void howManyPersonHaveCats() {
-        // count the number of persons who owns cats
-        int count = 0;
+        // Count the number of persons who owns cats
+        int count = people.count(person -> person.hasPetType(PetType.CAT));
         assertEquals(2, count);
     }
 
     @Test
     public void whoOwnsTheYoungestPet() {
-        // find the person who owns the youngest pet
+        // Find the person who owns the youngest pet
         Option<Person> person = null;
         assertEquals("Jake", person.get().getFirstName());
     }
 
     @Test
     public void whoOwnsTheOldestPet() {
-        // find the person who owns the oldest pet
+        // Find the person who owns the oldest pet
         Option<Person> person = null;
         assertEquals("Ted", person.get().getFirstName());
     }
 
     @Test
     public void averagePetAge() {
-        // replace null by the average pet age
+        // Replace null by the average pet age
         Option<Double> average = null;
         assertEquals("1.89", new BigDecimal(average.get())
                 .setScale(2, RoundingMode.HALF_EVEN).toPlainString());
@@ -144,20 +144,17 @@ public class CollectionsExercises extends PetDomainKata {
 
     @Test
     public void totalPetAge() {
-        // replace 0 by the total age of all the pets
+        // Replace 0 by the total age of all the pets
         Number average = 0;
         assertEquals(17L, average);
     }
-    //endregion
 
     @Test
     public void petsNameSorted() {
-        // sort pet names alphabetically
+        // Sort pet names alphabetically
         String sortedPetNames = null;
         assertEquals("Dolly,Fuzzy,Serpy,Speedy,Spike,Spot,Tabby,Tweety,Wuzzy", sortedPetNames);
     }
-    //endregion
-
 
     @Test
     public void sortByAge() {
@@ -179,7 +176,7 @@ public class CollectionsExercises extends PetDomainKata {
 
     @Test
     public void top3OlderPets() {
-        // get the names of the 3 older pets
+        // Get the names of the 3 older pets
         Seq<Pet> top3OlderPets = null;
 
         assertEquals(top3OlderPets.size(), 3);
