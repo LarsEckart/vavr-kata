@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-    api("io.vavr:vavr:0.10.2")
+    api("io.vavr:vavr:0.10.4")
     testImplementation(platform("org.junit:junit-bom:5.9.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
