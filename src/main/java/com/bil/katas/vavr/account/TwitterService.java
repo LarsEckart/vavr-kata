@@ -1,6 +1,7 @@
 package com.bil.katas.vavr.account;
 
 public class TwitterService {
+
     public String register(String email, String name) {
         return "TwitterAccountId";
     }

@@ -4,12 +4,9 @@ import io.vavr.collection.HashMap;
 import io.vavr.collection.Map;
 import io.vavr.collection.Seq;
 import io.vavr.collection.Vector;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-@Data
-@AllArgsConstructor
 public class Person {
+
     private final String firstName;
     private final String lastName;
     private final Seq<Pet> pets;
@@ -18,12 +15,18 @@ public class Person {
         this(firstName, lastName, Vector.empty());
     }
 
+    public Person(String firstName, String lastName, Seq<Pet> pets) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pets = pets;
+    }
+
     public boolean named(String name) {
         return name.equals(firstName + " " + lastName);
     }
 
     public Map<PetType, Integer> getPetTypes() {
-        return pets.groupBy(Pet::getType)
+        return pets.groupBy(Pet::type)
                 .map(e -> Map.entry(e._1, e._2.size()))
                 .collect(HashMap.collector());
     }
@@ -43,4 +46,18 @@ public class Person {
     public int getNumberOfPets() {
         return this.pets.size();
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Seq<Pet> getPets() {
+        return pets;
+    }
+
+
 }

@@ -1,15 +1,5 @@
 package com.bil.katas.vavr.exercises;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+public record Pet(PetType type, String name, int age) {
 
-/**
- * @author Alexandre Grison (eqk83)
- */
-@Data
-@AllArgsConstructor
-public class Pet {
-    private final PetType type;
-    private final String name;
-    private final int age;
 }

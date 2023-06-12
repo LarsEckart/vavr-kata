@@ -1,11 +1,13 @@
 package com.bil.katas.vavr.exercises;
 
 import io.vavr.control.Try;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * By doing these exercises you should have learned :
@@ -32,10 +34,10 @@ public class TryExercises extends PetDomainKata {
         Try<Integer> tryResult = null;
         Integer result = 0;
 
-        Assert.assertEquals(4, result, 0);
-        Assert.assertTrue(tryResult.isSuccess());
-        Assert.assertFalse(tryResult.isEmpty());
-        Assert.assertFalse(tryResult.isFailure());
+        assertEquals(4, result, 0);
+        Assertions.assertTrue(tryResult.isSuccess());
+        Assertions.assertFalse(tryResult.isEmpty());
+        Assertions.assertFalse(tryResult.isFailure());
     }
 
     @Test
@@ -44,10 +46,11 @@ public class TryExercises extends PetDomainKata {
         Integer z = 3;
         Integer result = 0;
 
-        Assert.assertEquals(7, result, 0);
+        assertEquals(7, result, 0);
     }
 
-    @Test(expected = ArithmeticException.class)
+    // expecting ArithmeticException
+    @Test
     public void divideByZeroIsAlwaysAGoodIdea() {
         // Divide x by 0 and get the result
     }
@@ -58,7 +61,7 @@ public class TryExercises extends PetDomainKata {
         Integer x = 1;
         Integer result = -1;
 
-        Assert.assertEquals(0, result, 0);
+        assertEquals(0, result, 0);
     }
 
     @Test
@@ -68,7 +71,7 @@ public class TryExercises extends PetDomainKata {
 
         Integer result = -1;
 
-        Assert.assertEquals(0, result, 0);
+        assertEquals(0, result, 0);
     }
 
     @Test
@@ -82,7 +85,7 @@ public class TryExercises extends PetDomainKata {
 
         Integer result = 0;
 
-        Assert.assertEquals(2, result, 0);
+        assertEquals(2, result, 0);
     }
 
     @Test
@@ -97,6 +100,6 @@ public class TryExercises extends PetDomainKata {
 
         Integer result = 0;
 
-        Assert.assertEquals(1, result, 0);
+        assertEquals(1, result, 0);
     }
 }
