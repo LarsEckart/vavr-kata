@@ -59,5 +59,8 @@ public class Person {
         return pets;
     }
 
-
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }
