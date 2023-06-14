@@ -54,10 +54,10 @@ public class CollectionsExercises extends PetDomainKata {
     @Test
     public void getPeopleWithCats() {
         // Replace null, with a positive filtering method on Seq.
-        Seq<String> peopleWithCats = people.filter(person -> person.hasPetType(CAT)).map(Person::getFirstName);
+        Seq<Person> peopleWithCats = people.filter(person -> person.hasPetType(CAT));
 
         assertEquals(peopleWithCats.size(), 2);
-        assertEquals("Mary, Bob", peopleWithCats.mkString(", "));
+        assertEquals("Mary Smith, Bob Smith", peopleWithCats.mkString(", "));
     }
 
     @Test
