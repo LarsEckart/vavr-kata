@@ -78,7 +78,7 @@ public class CollectionsExercises extends PetDomainKata {
     @Test
     public void doAllPeopleHavePets() {
         // Replace with a method call send to this.people that checks if all people have pets
-        Predicate<Person> predicate = null;
+        Predicate<Person> predicate = p -> p.isPetPerson();
         boolean result = people.forAll(predicate);
         assertFalse(result);
     }
@@ -86,7 +86,7 @@ public class CollectionsExercises extends PetDomainKata {
     @Test
     public void howManyPeopleHaveCats() {
         // Replace 0 with the correct answer
-        int count = 0;
+        int count = people.count(person -> person.hasPetType(CAT));
         assertEquals(2, count);
     }
 
