@@ -71,7 +71,7 @@ public class CollectionsExercises extends PetDomainKata {
     @Test
     public void doAnyPeopleHaveCats() {
         // Replace null with a Predicate lambda which checks for PetType.CAT
-        boolean doAnyPeopleHaveCats = false;
+        boolean doAnyPeopleHaveCats = people.exists(p -> p.hasPetType(CAT));
         assertTrue(doAnyPeopleHaveCats);
     }
 
