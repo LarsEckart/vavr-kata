@@ -34,7 +34,7 @@ public class CollectionsExercises extends PetDomainKata {
     @Test
     public void getFirstNamesOfAllPeople() {
         // Replace null, with a transformation method on Seq.
-        Seq<String> firstNames = null;
+        Seq<String> firstNames = people.map(Person::getFirstName);
 
         Seq<String> expectedFirstNames = Vector.of("Mary", "Bob", "Ted", "Jake", "Barry", "Terry", "Harry", "John");
         assertEquals(expectedFirstNames, firstNames);
@@ -46,7 +46,7 @@ public class CollectionsExercises extends PetDomainKata {
         Seq<Pet> pets = person.getPets();
 
         // Replace null, with a transformation method on Seq.
-        Seq<String> names = null;
+        Seq<String> names = pets.map(Pet::name);
 
         assertEquals("Tabby", names.mkString());
     }
