@@ -63,7 +63,7 @@ public class CollectionsExercises extends PetDomainKata {
     @Test
     public void getPeopleWithoutCats() {
         // Replace null, with a negative filtering method on Seq.
-        Seq<Person> peopleWithoutCats = null;
+        Seq<Person> peopleWithoutCats = people.reject(person -> person.hasPetType(CAT));
 
         assertEquals(peopleWithoutCats.size(), 6);
     }
