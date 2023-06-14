@@ -88,11 +88,12 @@ public class CollectionsExercises extends PetDomainKata {
         // Replace 0 with the correct answer
         int count = people.count(person -> person.hasPetType(CAT));
         assertEquals(2, count);
+        assertEquals(8, people.size());
     }
 
     @Test
     public void findMarySmith() {
-        Person result = this.getPersonNamed("Mary Smith");
+        Person result = people.find(person -> person.getFirstName().equals("Mary") && person.getLastName().equals("Smith")).getOrElseThrow(() -> new RuntimeException("Not found"));
         assertEquals("Mary", result.getFirstName());
         assertEquals("Smith", result.getLastName());
     }
