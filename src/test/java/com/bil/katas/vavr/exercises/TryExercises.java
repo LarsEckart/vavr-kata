@@ -31,8 +31,8 @@ public class TryExercises extends PetDomainKata {
     @Test
     public void getTheResultOfDivide() {
         // Divide x = 9 by y = 2
-        Try<Integer> tryResult = null;
-        Integer result = 0;
+        Try<Integer> tryResult = Divide(9, 2);
+        Integer result = tryResult.get();
 
         assertEquals(4, result, 0);
         Assertions.assertTrue(tryResult.isSuccess());
@@ -44,7 +44,7 @@ public class TryExercises extends PetDomainKata {
     public void mapTheResultOfDivide() {
         // Divide x = 9 by y = 2 and add z to the result
         Integer z = 3;
-        Integer result = 0;
+        Integer result = Divide(9, 2).map(r -> r + z).get();
 
         assertEquals(7, result, 0);
     }
