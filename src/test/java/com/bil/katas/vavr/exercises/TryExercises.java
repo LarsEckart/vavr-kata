@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * By doing these exercises you should have learned :
@@ -35,7 +36,7 @@ public class TryExercises extends PetDomainKata {
         Integer result = tryResult.get();
 
         assertEquals(4, result, 0);
-        Assertions.assertTrue(tryResult.isSuccess());
+        assertTrue(tryResult.isSuccess());
         Assertions.assertFalse(tryResult.isEmpty());
         Assertions.assertFalse(tryResult.isFailure());
     }
@@ -53,6 +54,8 @@ public class TryExercises extends PetDomainKata {
     @Test
     public void divideByZeroIsAlwaysAGoodIdea() {
         // Divide x by 0 and get the result
+        int result = Divide(42, 0).getOrElseTry(() -> 0);
+        assertEquals(0, result);
     }
 
     @Test
