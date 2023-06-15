@@ -62,7 +62,7 @@ public class TryExercises extends PetDomainKata {
     public void divideByZeroOrElse() {
         // Divide x by 0, on exception returns 0
         Integer x = 1;
-        Integer result = -1;
+        Integer result = Divide(x, 0).getOrElse(0);
 
         assertEquals(0, result, 0);
     }
