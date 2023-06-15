@@ -88,7 +88,9 @@ public class TryExercises extends PetDomainKata {
         Integer x = 8;
         Integer y = 4;
 
-        Integer result = 0;
+        Integer result = Divide(x,y).onFailure(e -> System.out.println("Error : " + e.getMessage()))
+                .onSuccess(r -> System.out.println(SUCCESS_MESSAGE + r))
+                .getOrElse(0);
 
         assertEquals(2, result, 0);
     }
