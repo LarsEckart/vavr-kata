@@ -72,7 +72,9 @@ public class TryExercises extends PetDomainKata {
         // Divide x by 0, log the failure message to the console and get 0
         Integer x = 1;
 
-        Integer result = -1;
+        Integer result = Divide(x, 0)
+                .onFailure(e -> System.out.println("Error : " + e.getMessage()))
+                .getOrElse(0);
 
         assertEquals(0, result, 0);
     }
