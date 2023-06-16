@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * By doing these exercises you should have learned :
@@ -26,7 +25,9 @@ public class TryExercises extends PetDomainKata {
     private final String SUCCESS_MESSAGE = "I m a fucking genius the result is ";
 
     private Try<Integer> Divide(Integer x, Integer y) {
-        return Try.of(() -> x / y);
+        return Try.of(() -> x / y)
+                .onSuccess(r -> System.out.println(SUCCESS_MESSAGE + r))
+                .onFailure(e -> System.out.println("Error : " + e.getMessage()));
     }
 
     @Test
@@ -46,16 +47,17 @@ public class TryExercises extends PetDomainKata {
         // Divide x = 9 by y = 2 and add z to the result
         Integer z = 3;
         Integer result = Divide(9, 2).map(r -> r + z).get();
+        Integer result2 = Divide(9, 2).flatMap(r -> Try.of(() -> r + z)).get();
 
         assertEquals(7, result, 0);
+        assertEquals(7, result2, 0);
     }
 
     // expecting ArithmeticException
     @Test
     public void divideByZeroIsAlwaysAGoodIdea() {
         // Divide x by 0 and get the result
-        int result = Divide(42, 0).getOrElseTry(() -> 0);
-        assertEquals(0, result);
+        assertThrows(ArithmeticException.class, () -> Divide(42, 0).get());
     }
 
     @Test
@@ -88,9 +90,11 @@ public class TryExercises extends PetDomainKata {
         Integer x = 8;
         Integer y = 4;
 
-        Integer result = Divide(x,y).onFailure(e -> System.out.println("Error : " + e.getMessage()))
+        Integer result = Divide(x, y).onFailure(e -> System.out.println("Error : " + e.getMessage()))
                 .onSuccess(r -> System.out.println(SUCCESS_MESSAGE + r))
                 .getOrElse(0);
+
+        Either
 
         assertEquals(2, result, 0);
     }
@@ -105,7 +109,10 @@ public class TryExercises extends PetDomainKata {
         Integer x = 27;
         Integer y = 3;
 
-        Integer result = 0;
+        Integer result = Divide(x, y)
+                .flatMap(r -> Divide(r, y))
+                .flatMap(t -> Divide(t, y))
+                .getOrElse(0);
 
         assertEquals(1, result, 0);
     }

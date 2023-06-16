@@ -1,5 +1,7 @@
 package com.bil.katas.vavr.account;
 
+import io.vavr.control.Try;
+
 import java.util.UUID;
 
 public class AccountService {
@@ -15,38 +17,38 @@ public class AccountService {
     }
 
     public String register(UUID id) {
-        try {
-            User user = this.userService.findById(id);
+        return Try.of(() -> findUser(id))
+                .map(this::register)
+                .map(this::authenticate)
+                .map(this::tweet)
+                .onSuccess(c -> saveAndLog(id, c))
+                .map(c -> c.tweetUrl)
+                .onFailure(ex -> logFailure(id, ex))
+                .getOrElse(() -> null);
+    }
 
-            if (user == null) {
-                return null;
-            }
+    private Context findUser(UUID id) {
+        return new Context(this.userService.findById(id));
+    }
 
-            String accountId = this.twitterService.register(user.getEmail(), user.getName());
+    private void logFailure(UUID id, Throwable ex) {
+        this.businessLogger.logFailureRegister(id, ex);
+    }
 
-            if (accountId == null) {
-                return null;
-            }
+    private void saveAndLog(UUID id, Context c) {
+        this.userService.updateTwitterAccountId(id, c.accountId);
+        businessLogger.logSuccessRegister(id);
+    }
 
-            String twitterToken = this.twitterService.authenticate(user.getEmail(), user.getPassword());
+    private Context register(Context c) {
+        return c.withAccountId(this.twitterService.register(c.user.getEmail(), c.user.getName()));
+    }
 
-            if (twitterToken == null) {
-                return null;
-            }
+    private Context tweet(Context c) {
+        return c.withTweetUrl(twitterService.tweet(c.twitterToken, "Hello I am " + c.user.getName()));
+    }
 
-            String tweetUrl = this.twitterService.tweet(twitterToken, "Hello I am " + user.getName());
-
-            if (tweetUrl == null) {
-                return null;
-            }
-
-            this.userService.updateTwitterAccountId(id, accountId);
-            businessLogger.logSuccessRegister(id);
-
-            return tweetUrl;
-        } catch (Exception ex) {
-            this.businessLogger.logFailureRegister(id, ex);
-            return null;
-        }
+    public Context authenticate(Context c) {
+        return c.withToken(this.twitterService.authenticate(c.user.getEmail(), c.user.getPassword()));
     }
 }

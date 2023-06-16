@@ -17,7 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
- * In this real life example you will have to combine what you have learned on vavr
+ * In this real life example you will have to combine what you have learned
+ * on vavr
  * Refactor the AccountService, write cleaner code by using vavr
  * You will use at least :
  * <p/>
